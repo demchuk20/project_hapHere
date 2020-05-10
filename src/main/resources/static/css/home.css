@@ -1,0 +1,23 @@
+.site-header {
+    background-color: rgb(255, 255, 255);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+
+.carousel, .carousel, .carousel-item > img, .carousel-inner {
+    max-height: 100%;
+}
+
+#info {
+    height: 500px;
+}
+
+.img {
+    width: 100%;
+    height: auto;
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}

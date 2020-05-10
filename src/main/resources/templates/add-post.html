@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="ua">
+<head>
+    <title>Spring Security Example</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/home.css}" href="../static/css/home.css">
+</head>
+<body>
+<nav class="site-header sticky-top fixed-top py-1">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#" aria-label="Product">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img"
+                 viewBox="0 0 24 24" focusable="false"><title>Product</title>
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"></path>
+            </svg>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" href="home.html" th:href="@{/}">Домашня<span
+                class="sr-only">(current)</span></a>
+        <a sec:authorize="isAuthenticated()" class="py-2 d-none d-md-inline-block" th:href="@{/user}" href="user.html">Профіль</a>
+
+        <a class="py-2 d-none d-md-inline-block" href="#">Допомога</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">Про нас</a>
+        <a sec:authorize="isAnonymous()" class="btn btn-outline-primary my-2 my-sm-0" th:href="@{/sign-in}"
+           type="button">Увійти</a>
+        <a sec:authorize="isAuthenticated()" class="btn btn-outline-danger my-2 my-sm-0" type="button"
+           th:href="@{/logout}">Вийти</a>
+    </div>
+</nav>
+
+<div class="container">
+    <br>
+    <h1 class="display-4">Заповніть форму</h1>
+    <br> <br>
+    <form method="post" class="w-50" th:action="@{/add-post}" enctype="multipart/form-data" required="">
+        <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">Заголовок</span>
+            </div>
+            <input required="" name="tittle" type="text" class="form-control" aria-label="Заголовок" aria-describedby="addon-wrapping">
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Введіть тест</span>
+            </div>
+            <textarea name="text" required="" class="form-control" aria-label="With textarea"></textarea>
+        </div>
+        <br>
+        <div class="input-group mb-3">
+            <div class="custom-file">
+                <input type="file" name="file" class="custom-file-input" id="inputGroupFile01"
+                       aria-describedby="inputGroupFileAddon01" required="">
+                <label class="custom-file-label" for="inputGroupFile01">Виберіть файл</label>
+            </div>
+        </div>
+        <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Жанр</span>
+            </div>
+            <input type="text" required="" name="category" class="form-control" aria-label="Жанр" aria-describedby="addon-wrapping">
+        </div>
+        <br>
+        <div class="input-group form-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Дата</span>
+            </div>
+            <input required="" name="date" class="form-control w-50" type="datetime-local" id="datetime"
+                   th:min="${#dates.format(#dates.createNow(), 'dd MM yyyy HH:mm')}">
+        </div>
+        <button class="btn btn-success" type="submit">add</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>
